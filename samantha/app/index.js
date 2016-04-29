@@ -1,18 +1,24 @@
 'use strict';
 const angular = require('angular');
 
-const app = angular.module('ChefApp', []);
+require('angular-route');
+
+const app = angular.module('ChefApp', ['ngRoute']);
 
 require('./services/http_service')(app);
 require('./directives/directives')(app);
+require('./services/error_service')(app);
+require('./services/auth_service')(app);
 
-app.controller('ChefController', ['$http', 'ResourceService',
-function($http, ResourceService) {
+app.controller('ChefController', ['$http', '$location', 'AuthService', 'ErrorService', 'ResourceService',
+function($http, $location, AuthService, ErrorService, ResourceService) {
 
   const vm = this;
   const chefResource = ResourceService('chefs');
 
   vm.chefs = ['chef'];
+
+  vm.name = 'bob';
 
   vm.getChefs = function() {
     chefResource.getAll()
@@ -50,10 +56,14 @@ function($http, ResourceService) {
 
   vm.removeChef = function(chef) {
     chefResource.delete()
-    .then((res) => {
+    .then(() => {
       vm.chefs = vm.chefs.filter((c) => c._id != chef._id);
     });
 
+  };
+  vm.signUp = function(chef) {
+    console.log('chef');
+    AuthService.signUp(chef);
   };
 }]);
 
@@ -102,9 +112,28 @@ function($http, ResourceService) {
 
   vm.removeRecipe = function(recipe) {
     recipeResource.delete()
-    .then((res) => {
+    .then(() => {
       vm.recipes = vm.recipes.filter((r) => r._id != recipe._id);
     });
-
   };
+
+}]);
+
+app.config(['$routeProvider', function($routeProvider) {
+  $routeProvider
+  .when('/signup', {
+    controller: 'ChefController',
+    controllerAs: 'chefctrl',
+    templateUrl: '/views/signUp.html'
+  })
+  .when('/signin', {
+    controller: 'ChefController',
+    controllerAs: 'chefctrl',
+    templateUrl: '/views/signIn.html'
+  })
+  .when('/home', {
+    controller: 'ChefController',
+    controllerAs: 'chefctrl',
+    templateUrl: '/views/home.html'
+  });
 }]);

@@ -9,57 +9,8 @@
     </style>
   </head>
   <body data-ng-app="ChefApp">
-    <main data-ng-init="chefctrl.getChefs()" data-ng-controller="ChefController as chefctrl">
-      <h2>See all chef's below:</h2>
-      <ul>
-        <li class="ng-cloak" data-ng-cloak data-ng-repeat="chef in chefctrl.chefs">{{chef}}
-          <button type="submit" data-ng-click="chefctrl.removeChef(chef)">Delete Chef</button>
-          <button type="submit" data-ng-click="chefctrl.updateChef.displayed = chef._id">Update Chef</button>
-          <form data-ng-show="chefctrl.updateChef.displayed == chef._id" data-ng-submit="chefctrl.updateChef(chef)">
-            <input type="text" placeholder="name" data-ng-model="chef.name"/>
-            <input type="text" placeholder="password" data-ng-model="chef.password"/>
-            <input type="text" placeholder="fun fact" data-ng-model="chef.funFact"/>
-            <input type="text" placeholder="recipes" data-ng-model="chef.recipes"/>
-            <button type="submit">Save Changes</button>
-            <button type="reset" data-ng-click="chefctrl.resetChef(chef); chefctrl.updateChef.displayed=null">Cancel</button>
-          </form>
-        </li>
-      </ul>
-      <h2>Add a new chef:</h2>
-      <form data-ng-submit="chefctrl.createChef(newChef)">
-        <input type="text" placeholder="Name" data-ng-model="newChef.name"/>
-        <input type="text" placeholder="Password" data-ng-model="newChef.password"/>
-        <input type="text" placeholder="Fun Fact" data-ng-model="newChef.funFact"/>
-        <input type="text" placeholder="Recipes" data-ng-model="newChef.recipes"/>
-        <input type="reset"/>
-        <button type="submit">Add New Chef</button>
-      </form>
-    </main>
-    <main data-ng-init="recipectrl.getRecipes()" data-ng-controller="RecipeController as recipectrl">
-      <h2>See all recipes below:</h2>
-      <ul>
-        <li class="ng-cloak" data-ng-cloak data-ng-repeat="recipe in recipectrl.recipes">{{recipe}}
-          <button type="submit" data-ng-click="recipectrl.removeRecipe(recipe)">Delete Recipe</button>
-          <button type="submit" data-ng-click="recipectrl.updateRecipe.displayed = recipe._id">Edit Recipe</button>
-          <form data-ng-show="recipectrl.updateRecipe.displayed == recipe._id" data-ng-submit="recipectrl.updateRecipe(recipe)">
-            <input type="text" placeholder="name" data-ng-model="recipe.name"/>
-            <input type="text" placeholder="cook time (in min)" data-ng-model="recipe.cookTime"/>
-            <input type="text" placeholder="ingredients" data-ng-model="recipe.ingredients"/>
-            <button type="submit">Save Changes</button>
-            <button type="reset" data-ng-click="recipectrl.resetRecipe(recipe); recipectrl.updateRecipe.displayed=null">Cancel</button>
-          </form>
-        </li>
-      </ul>
-      <h2>Add a new recipe:</h2>
-      <form data-ng-submit="recipectrl.createRecipe(newRecipe)">
-        <input type="text" placeholder="Name" data-ng-model="newRecipe.name"/>
-        <input type="text" placeholder="Cook Time" data-ng-model="newRecipe.cookTime"/>
-        <input type="text" placeholder="Ingredients" data-ng-model="newRecipe.ingredients"/>
-        <input type="reset"/>
-        <button type="submit">Add New Recipe</button>
-      </form>
-      <custom></custom>
-      <brownies-eaten total=0></brownies-eaten>
+    <main ng-view>
+      PROCESSING
     </main>
     <custom></custom>
       <my-footer year=2016></my-footer>

@@ -1,0 +1,8 @@
+<section>
+  <h1 ng-if="chefctrl.error">{{chefctrl.error}} </h1>
+  <form ng-submit="chefctrl.signIn(chef)">
+    <input type="text" placeholder="name" ng-model="chef.name">
+    <input type="password" placeholder="password" ng-model="chef.password">
+    <button type="submit"> Sign In </button>
+  </form>
+</section>
